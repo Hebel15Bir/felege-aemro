@@ -53,48 +53,7 @@ export async function registerStudent(studentData) {
 	const registrant = new Registrant({
 		fullName: studentData.get('fullName'),
 		kName: studentData.get('kName'),
-		age: parseInt(studentData.get('age')),
-		photoUrl: photoUrl,
-		sex: studentData.get('sex'),
-		phoneNo: studentData.get('phoneNo'),
-		isOwn: studentData.get('isOwn') === 'on',
-		ownerName: studentData.get('ownerName'),
-		priesthood: studentData.get('priesthood'),
-		isNewStudent: studentData.get('isNewStudent') === 'on',
-		registryDate:
-			studentData.get('isNewStudent') === 'on'
-				? todayEthCalendar()
-				: {
-						year: parseInt(studentData.get('year')),
-						month: studentData.get('month'),
-						date: parseInt(studentData.get('date')),
-				  },
-		classDetails: {
-			classroom: studentData.get('classroom'),
-			subject: studentData.get('subject'),
-			classTime: studentData.get('classTime'),
-		},
-		confirmStatus: 'registered',
-		paymentId: studentData.get('paymentId'),
-	});
-
-	try {
-		await registrant.save();
-	} catch (err) {
-		console.log(todayEthCalendar());
-		console.log(registrant);
-		console.log(err);
-		return {
-			success: '',
-			error: 'እባክዎ አስፈላጊዎቹን መረጃዎች በሙሉ ይሙሉ።',
-		};
-	}
-
-	await disconnectDatabase();
-
-	return {
-		success:
-			'ምዝገባዎ በአግባቡ ተጠናቋል። የክፍያ ደረሰኝ በመያዝ ወደ ጉባኤ ቤቱ ጽሕፈት ቤት ሔደው ምዝገባዎን ያረጋግጡ።',
+		age: parseInt(studentData.getያሳዩ።',
 		error: '',
 	};
 }
