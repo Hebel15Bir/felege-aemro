@@ -38,61 +38,54 @@ export default function RegisterForm() {
 			setLoading(false);
 			setError('ስሕተት ተፈጥሯል፤ እባክዎ እንደገና ይሞክሩ።');
 		}
-		// make a request
-		// if there is an error, change the spinning modal to a red message with a close button
-		// but closing it shouldn't cause the form to lose all its previous data
-		// if there is a success instead, do the same but with a green message
-		// but closing it should clean out the form
 	};
 
 	return (
-		<form
-			id='form'
-			// action={handleSubmit}
-			className='w-md max-w-screen mx-auto shadow-lg rounded p-6'
-		>
+		<form id='form' className='w-md max-w-screen mx-auto shadow-lg rounded p-6'>
 			<h2 className='text-2xl text-center mb-4'>የምዝገባ ቅጽ</h2>
-			<div className='flex w-full justify-center items-center gap-5 mb-3'>
-				<div className='flex-1 min-w-0'>
-					<input
-						type='text'
-						placeholder='ሙሉ ስም'
-						name='fullName'
-						className='p-2 border cursor-pointer border-gray-300 rounded focus:border-blue-500 outline-none mb-2.5'
-					/>
-					<input
-						type='text'
-						placeholder='ክርስትና ስም'
-						name='kName'
-						className='p-2 border cursor-pointer border-gray-300 rounded focus:border-blue-500 outline-none mb-2.5'
-					/>
-					<input
-						type='text'
-						placeholder='ዕድሜ'
-						name='age'
-						className='p-2 border cursor-pointer border-gray-300 rounded focus:border-blue-500 outline-none mb-2.5'
-					/>
+			<div className='flex w-full justify-center items-center gap-3 mb-3'>
+				<div className='min-w-0 flex-1'>
 					<div>
 						<input
-							type='radio'
-							className='mr-1 h-4 w-4 cursor-pointer'
-							name='sex'
-							id='male'
-							value='ወንድ'
+							type='text'
+							placeholder='ሙሉ ስም'
+							name='fullName'
+							className='p-2 border w-full cursor-pointer border-gray-300 rounded focus:border-blue-500 outline-none mb-2.5'
 						/>
-						<label className='mr-3 text-xl' htmlFor='male'>
-							ወንድ
-						</label>
 						<input
-							type='radio'
-							className='mr-1 h-4 w-4 cursor-pointer'
-							name='sex'
-							id='female'
-							value='ሴት'
+							type='text'
+							placeholder='ክርስትና ስም'
+							name='kName'
+							className='p-2 border w-full cursor-pointer border-gray-300 rounded focus:border-blue-500 outline-none mb-2.5'
 						/>
-						<label className='mr-3 text-xl' htmlFor='female'>
-							ሴት
-						</label>
+						<input
+							type='text'
+							placeholder='ዕድሜ'
+							name='age'
+							className='p-2 border w-full cursor-pointer border-gray-300 rounded focus:border-blue-500 outline-none mb-2.5'
+						/>
+						<div>
+							<input
+								type='radio'
+								className='mr-1 h-4 w-4 cursor-pointer'
+								name='sex'
+								id='male'
+								value='ወንድ'
+							/>
+							<label className='mr-3 text-xl' htmlFor='male'>
+								ወንድ
+							</label>
+							<input
+								type='radio'
+								className='mr-1 h-4 w-4 cursor-pointer'
+								name='sex'
+								id='female'
+								value='ሴት'
+							/>
+							<label className='mr-3 text-xl' htmlFor='female'>
+								ሴት
+							</label>
+						</div>
 					</div>
 				</div>
 				<div className='flex items-center justify-center border border-gray-300 p-2 min-w-[150px] h-52'>
