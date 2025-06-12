@@ -223,7 +223,7 @@ export default function RegisterForm() {
 						>
 							{[...Array(14).keys()].map((year) => (
 								<option key={year} value={year + 2004}>
-									{year + 2005}
+									{year + 2004}
 								</option>
 							))}
 						</select>
