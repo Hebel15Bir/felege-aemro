@@ -54,7 +54,6 @@ export type ReducerAction =
 	| { type: 'reset form' }
 	| { type: 'update field'; payload: Partial<FormInfo> };
 
-// Data Validation Types
 export type DataType = number | string | boolean | ImageData;
 
 export type EmptyType = 0 | '' | null;
