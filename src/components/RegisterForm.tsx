@@ -319,6 +319,10 @@ export default function RegisterForm() {
 									type: 'update field',
 									payload: { classroom: newVal },
 								});
+								dispatch({
+									type: 'update field',
+									payload: { subject: '' },
+								});
 							}}
 						/>
 						<DropDown
