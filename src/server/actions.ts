@@ -12,7 +12,7 @@ cloudinary.config({
 	api_secret: 'E0PKUYkmSHhaQqHfPKi-YMUfw0o',
 });
 
-export async function uploadImage(file: File): Promise<string> {
+async function uploadImage(file: File): Promise<string> {
 	const arrayBuffer = await file.arrayBuffer();
 	const buffer = Buffer.from(arrayBuffer);
 
