@@ -12,6 +12,29 @@ cloudinary.config({
 	api_secret: 'E0PKUYkmSHhaQqHfPKi-YMUfw0o',
 });
 
+export async function uploadImage(file: File): Promise<string> {
+	const arrayBuffer = await file.arrayBuffer();
+	const buffer = Buffer.from(arrayBuffer);
+
+	return new Promise((resolve, reject) => {
+		const uploadStream = cloudinary.uploader.upload_stream(
+			{
+				transformation: [
+					{ width: 150, height: 200, crop: 'thumb', gravity: 'face' },
+					{ angle: 'auto' },
+					{ fetch_format: 'jpg' },
+				],
+			},
+			(error, result) => {
+				if (error || !result) reject(error);
+				else resolve(result.secure_url);
+			}
+		);
+
+		uploadStream.end(buffer);
+	});
+}
+
 export async function registerStudent(
 	formData: FormInfo
 ): Promise<{ error: string }> {
@@ -27,19 +50,8 @@ export async function registerStudent(
 		};
 	}
 
-	let imageUrl: string;
-
 	try {
-		const arrayBuffer = await file.arrayBuffer();
-		const buffer = Buffer.from(arrayBuffer);
-		imageUrl = await new Promise((resolve, reject) => {
-			cloudinary.uploader
-				.upload_stream({}, (error, result) => {
-					if (error || !result) reject(error);
-					else resolve(result.secure_url);
-				})
-				.end(buffer);
-		});
+		imageUrl = await uploadImage(file);
 	} catch {
 		return {
 			error: 'ምስሉ በአግባቡ አልተጫነም። እባክዎ እንደገና ይሞክሩ።',
