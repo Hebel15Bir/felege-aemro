@@ -50,6 +50,8 @@ export async function registerStudent(
 		};
 	}
 
+	let imageUrl: string;
+
 	try {
 		imageUrl = await uploadImage(file);
 	} catch {
