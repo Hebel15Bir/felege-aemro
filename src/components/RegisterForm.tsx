@@ -8,9 +8,9 @@ import DropDown from './DropDown';
 import Image from 'next/image';
 import { useState, useReducer, FormEvent } from 'react';
 
-import { getInitialState, todayEthCalendar, validateFormData } from '@/util';
+import { getInitialState, validateFormData } from '@/util';
 import { FormInfo, ReducerAction } from '@/util/types';
-import { errorMsgs, months } from '@/util/consts';
+import { errorMsgs } from '@/util/consts';
 import { registerStudent } from '@/server/actions';
 
 function reducer(state: FormInfo, action: ReducerAction): FormInfo {
@@ -240,129 +240,6 @@ export default function RegisterForm() {
 					}}
 				/>
 			</div>
-			<CheckBox
-				name='isNewStudent'
-				placeholder='ዐዲስ ተመዝጋቢ ነዎት?'
-				value={state.isNewStudent}
-				handleChange={() => {
-					dispatch({
-						type: 'update field',
-						payload: state.isNewStudent
-							? { classTime: '' }
-							: { classTime: 'የጠዋት' },
-					});
-					dispatch({
-						type: 'update field',
-						payload: { isNewStudent: !state.isNewStudent },
-					});
-				}}
-			/>
-			{!state.isNewStudent && (
-				<>
-					<div className='text-lg mb-2'>ትምህርት የጀመሩበትን ቀን ያስገቡ።</div>
-					<div className='flex items-center justify-center gap-3'>
-						<DropDown
-							name='date'
-							value={state.date}
-							items={Array.from({ length: 30 }, (_, i) => i + 1)}
-							handleChange={(newVal) => {
-								dispatch({
-									type: 'update field',
-									payload: { date: parseInt(newVal) },
-								});
-							}}
-						/>
-						<DropDown
-							name='month'
-							value={state.month}
-							items={months}
-							handleChange={(newVal) => {
-								dispatch({
-									type: 'update field',
-									payload: { month: newVal },
-								});
-							}}
-						/>
-						<DropDown
-							name='year'
-							value={state.year}
-							items={Array.from(
-								{ length: todayEthCalendar().year - 2004 + 1 },
-								(_, i) => todayEthCalendar().year - i
-							)}
-							handleChange={(newVal) => {
-								dispatch({
-									type: 'update field',
-									payload: { year: parseInt(newVal) },
-								});
-							}}
-						/>
-					</div>
-					<div className='text-xl mb-2'>የትምህርት ዝርዝር ያስገቡ።</div>
-					<div>
-						<DropDown
-							name='classroom'
-							value={state.classroom}
-							placeholder='የሚማሩበት ክፍል'
-							items={[
-								'ንባብ-1',
-								'ንባብ-2',
-								'ንባብ-3',
-								'ዜማ',
-								'ቅኔ',
-								'ቅዳሴ',
-								'አቋቋም',
-								'ትርጓሜ',
-							]}
-							handleChange={(newVal) => {
-								dispatch({
-									type: 'update field',
-									payload: { classroom: newVal },
-								});
-								dispatch({
-									type: 'update field',
-									payload: { subject: '' },
-								});
-							}}
-						/>
-						<DropDown
-							name='subject'
-							value={state.subject}
-							placeholder='የሚማሩት ትምህርት'
-							items={[state.classroom, 'ንባብ', 'ዜማ'].filter((cls, index) => {
-								if (cls === 'ዜማ') {
-									if (index === 0) {
-										return true;
-									}
-									return ['ንባብ-3', 'አቋቋም', 'ቅዳሴ'].includes(state.classroom);
-								} else if (cls === 'ንባብ') {
-									return !['ቅኔ', 'ትርጓሜ'].includes(state.classroom);
-								} else {
-									return !cls.includes('ንባብ-');
-								}
-							})}
-							handleChange={(newVal) => {
-								dispatch({
-									type: 'update field',
-									payload: { subject: newVal },
-								});
-							}}
-						/>
-						<DropDown
-							name='classTime'
-							placeholder='የሚማሩበት ጊዜ'
-							value={state.classTime}
-							items={['የሌሊት', 'የጠዋት', 'የማታ']}
-							handleChange={(newVal) => {
-								dispatch({
-									type: 'update field',
-									payload: { classTime: newVal },
-								});
-							}}
-						/>
-					</div>
-				</>
-			)}
 			<TextInput
 				name='paymentId'
 				placeholder='የደረሰኝ ቍጥር'
